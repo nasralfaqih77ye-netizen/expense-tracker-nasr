@@ -260,21 +260,6 @@ footer {
   opacity: 1 !important;
 }
 
-
-#filterCategory {
-  display: block;
-  width: 100%;
-  margin: 12px 0 18px;
-  padding: 10px 12px;
-  border: 1px solid #dbe2ea;
-  border-radius: 9px;
-  background: white;
-  color: #182230;
-  cursor: pointer;
-}
-
-
-
 .chart-card {
   margin-bottom: 24px;
   padding: 26px;
@@ -297,4 +282,57 @@ footer {
 
 .chart-card p {
   color: #64748b;
+}
+
+
+
+/* Search and category filter layout */
+.transaction-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 8px;
+}
+
+.filter-group label {
+  display: block;
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.filter-group input,
+.filter-group select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #dbe2ea;
+  border-radius: 9px;
+  background: white;
+  color: #182230;
+  box-sizing: border-box;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .transaction-filters {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
 }

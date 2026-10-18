@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-import { db, auth, authReady } from "./firebase";
+import { db, authReady } from "./firebase";
 
 import {
   collection,
@@ -177,7 +177,6 @@ function App() {
   async function deleteTransaction(id) {
     try {
       await authReady;
-
       await deleteDoc(doc(db, "expenses", id));
     } catch (error) {
       console.error("Error deleting transaction:", error);
@@ -291,35 +290,43 @@ function App() {
         <section className="transactions">
           <h2>Recent Transactions</h2>
 
-          <label htmlFor="searchTransactions">
-            Search Transactions
-          </label>
-          <input
-            id="searchTransactions"
-            type="text"
-            placeholder="Search by description..."
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
+          <div className="transaction-filters">
+            <div className="filter-group">
+              <label htmlFor="searchTransactions">
+                Search Transactions
+              </label>
+              <input
+                id="searchTransactions"
+                type="text"
+                placeholder="Search by description..."
+                value={searchTerm}
+                onChange={(event) =>
+                  setSearchTerm(event.target.value)
+                }
+              />
+            </div>
 
-          <label htmlFor="filterCategory">
-            Filter by Category
-          </label>
-          <select
-            id="filterCategory"
-            value={filterCategory}
-            onChange={(event) =>
-              setFilterCategory(event.target.value)
-            }
-          >
-            <option value="All">All Categories</option>
-            <option value="Food">Food</option>
-            <option value="Transport">Transport</option>
-            <option value="Education">Education</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Bills">Bills</option>
-            <option value="Other">Other</option>
-          </select>
+            <div className="filter-group">
+              <label htmlFor="filterCategory">
+                Filter by Category
+              </label>
+              <select
+                id="filterCategory"
+                value={filterCategory}
+                onChange={(event) =>
+                  setFilterCategory(event.target.value)
+                }
+              >
+                <option value="All">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Education">Education</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
 
           {filteredExpenses.length === 0 ? (
             <div className="empty-state">
